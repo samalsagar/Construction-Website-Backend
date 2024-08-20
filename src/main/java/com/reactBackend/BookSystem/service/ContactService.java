@@ -8,4 +8,6 @@ public interface ContactService {
     public ContactDetails saveDetails(ContactDetails contactDetails);
 
     public List<ContactDetails> getAllDetails();
+
+    public void deleteContact(int id);
 }

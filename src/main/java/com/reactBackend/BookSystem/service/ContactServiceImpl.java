@@ -22,4 +22,9 @@ public class ContactServiceImpl implements ContactService {
     public List<ContactDetails> getAllDetails() {
         return contactDetailsRepo.findAll();
     }
+
+    @Override
+    public void deleteContact(int id) {
+        contactDetailsRepo.deleteById(id);
+    }
 }

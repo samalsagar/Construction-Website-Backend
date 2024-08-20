@@ -28,5 +28,10 @@ public class RegisterServiceImpl implements RegisterService{
         return registerDetailsRepo.findAll();
     }
 
+    @Override
+    public void deleteRegister(int id) {
+         registerDetailsRepo.deleteById(id);
+    }
+
 
 }

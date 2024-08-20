@@ -18,8 +18,8 @@ public class RegisterController {
     @Autowired
     private RegisterServiceImpl registerService;
 
-    @Autowired
-    private LoginServiceImpl loginService;
+//    @Autowired
+//    private LoginServiceImpl loginService;
 
     @PostMapping("/add")
     public ApiResponse saveDetails(@RequestBody RegisterDetails registerDetails) {

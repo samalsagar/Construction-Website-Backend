@@ -11,4 +11,6 @@ public interface RegisterService {
     public RegisterDetails getDetailsByEmail(String email);
 
     public List<RegisterDetails> getAllRegister();
+
+    public void deleteRegister(int id);
 }
