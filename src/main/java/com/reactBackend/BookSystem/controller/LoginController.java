@@ -27,7 +27,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public ApiResponse checkLogin(@RequestBody String loginDetails) {
-//        ObjectMapper objectMapper = new ObjectMapper();
         try {
             // Convert string to JsonNode (generic JSON tree)
             JsonNode jsonNode = objectMapper.readTree(loginDetails);
@@ -37,7 +36,7 @@ public class LoginController {
                 return new ApiResponse("Invalid Details", false);
             } else {
                 if (registerService.getDetailsByEmail(resEmail) != null) {
-                    if (resEmail.equals("admin@gmail.com") && resPassword.equals("1234")) {
+                    if (resEmail.equals("architectyatharth@gmail.com") && resPassword.equals("yathartharc@7575")) {
                         return new ApiResponse("Login Success", true);
                     } else {
                         return new ApiResponse("Invalid Credentials...", false);
