@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reactBackend.BookSystem.ApiResponse.ApiResponse;
 import com.reactBackend.BookSystem.model.LoginDetails;
 import com.reactBackend.BookSystem.model.RegisterDetails;
-import com.reactBackend.BookSystem.service.LoginServiceImpl;
+//import com.reactBackend.BookSystem.service.LoginServiceImpl;
 import com.reactBackend.BookSystem.service.RegisterServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +21,8 @@ public class LoginController {
     @Autowired
     private RegisterServiceImpl registerService;
 
-    @Autowired
-    private LoginServiceImpl loginService;
+//    @Autowired
+//    private LoginServiceImpl loginService;
     ObjectMapper objectMapper = new ObjectMapper();
 
     @PostMapping("/login")
@@ -48,24 +48,5 @@ public class LoginController {
         } catch (Exception e) {
             return new ApiResponse("Getting error", false);
         }
-    }
-
-    @PostMapping("/save")
-    public ApiResponse saveDetails(@RequestBody String email) throws JsonProcessingException {
-        JsonNode jsonNode = objectMapper.readTree(email);
-        String resEmail = jsonNode.get("email").asText();
-
-        RegisterDetails res = registerService.getDetailsByEmail(resEmail);
-        LoginDetails loginDetails = new LoginDetails();
-        loginDetails.setAdminEmail(res.getEmail());
-        loginDetails.setAdminName(res.getName());
-        loginDetails.setLoginTime(new Date());
-        System.out.println(loginDetails);
-        if (loginService.saveLoginDetails(loginDetails).getLoginId() > 0) {
-            return new ApiResponse("Login details saved", true);
-        } else {
-            return new ApiResponse("Failed to save the details", false);
-        }
-//        return new ApiResponse("WORKED", true);
     }
 }

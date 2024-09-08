@@ -49,15 +49,53 @@ public class RatingDetailsController {
 
     @GetMapping("/allRatings")
     public List<RatingDetails> getAllRating() {
+//        List<RatingDetails> ratingDetails = ratingService.getAllRatings();
+////        System.out.println(ratingDetails);
+//        List<RatingDetails> test = new ArrayList<>();
+////
+//        for (RatingDetails ratingDetail : ratingDetails) {
+//            RegisterDetails register = registerService.getDetailsByEmail(ratingDetail.getEmailId());
+//            System.out.println(register);
+//            ratingDetail.setEmailId(register.getName());
+//            test.add(ratingDetail);
+//            System.out.println("HEY");
+//        }
+
+        // Fetch all rating details from the service
         List<RatingDetails> ratingDetails = ratingService.getAllRatings();
 
-        List<RatingDetails> test = new ArrayList<>();
+        // Create a new list to hold the updated rating details
+        List<RatingDetails> updatedRatingDetails = new ArrayList<>();
 
-        for (int i = 0; i < ratingDetails.size(); i++) {
-            RegisterDetails register = registerService.getDetailsByEmail(ratingDetails.get(i).getEmailId());
-            ratingDetails.get(i).setEmailId(register.getName());
+        // Iterate over each rating detail
+        for (RatingDetails ratingDetail : ratingDetails) {
+            // Fetch RegisterDetails using the email ID from the rating detail
+            RegisterDetails register = registerService.getDetailsByEmail(ratingDetail.getEmailId());
+
+            // Print the register object for debugging purposes
+            System.out.println("Register Details: " + register);
+
+            // Check if the register object is not null
+            if (register != null) {
+                // Update the email ID with the register's name
+                ratingDetail.setEmailId(register.getName());
+            } else {
+                // Handle the case where register is null
+                System.out.println("No RegisterDetails found for email: " + ratingDetail.getEmailId());
+                // Optionally, set a default value or leave it as is
+                ratingDetail.setEmailId("Unknown"); // Or handle as needed
+            }
+
+            // Add the updated rating detail to the new list
+            updatedRatingDetails.add(ratingDetail);
+
+            // Print a debug message
+            System.out.println("Processed rating detail for email: " + ratingDetail.getEmailId());
         }
 
-       return ratingDetails;
+        // Return the list of updated rating details
+        return updatedRatingDetails;
+
+//       return test;
     }
 }
